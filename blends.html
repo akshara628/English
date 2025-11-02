@@ -58,6 +58,167 @@
 <script>
 // ✅ 100 Common English Blends
 const blends = [
+  "bl","br","cl","cr","dr","fl","fr","gl","gr","pl","pr","sc","sk","sl","sm","sn","sp","st","sw","tr","tw",
+  "ch","sh","th","wh","ph","ck","gh","ng",
+  "dw","kw","wr","kn","gn","qu","sp","spr","spl","scr","shr","squ","str","thr",
+  "sc","sl","sm","sn","sp","st","sw","fr","fl","dr","gr","gl","cr","cl","br","bl","tr","tw",
+  "shr","sph","spl","spr","str","scr","squ","thr","phr","chr","tch","dge","nch","rth","rch","lth","nth","mbl","mpl","ndl","ntr"
+];
+
+// Build table
+const table = document.getElementById("blendTable");
+blends.forEach(blend => {
+  const row = document.createElement("tr");
+  const th = document.createElement("td");
+  th.textContent = blend;
+  row.appendChild(th);
+  ["a","e","i","o","u"].forEach(v => {
+    const combo = blend + v;
+    const td = document.createElement("td");
+    const span = document.createElement("span");
+    span.textContent = combo;
+    span.onclick = () => speakBlend(combo);
+    const pron = document.createElement("div");
+    pron.className = "pronunciation";
+    pron.textContent = `(${combo})`;
+    td.appendChild(span);
+    td.appendChild(pron);
+    row.appendChild(td);
+  });
+  table.appendChild(row);
+});
+
+// ✅ Improved Speech Function with Phonetic Fix
+function speakBlend(text) {
+  window.speechSynthesis.cancel();
+  setTimeout(() => {
+    const utter = new SpeechSynthesisUtterance(phoneticFix(text));
+    utter.lang = "en-US";
+    utter.rate = 0.9;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  }, 150);
+}
+
+// ✅ Fix for correct pronunciation (so "cra" -> "kra", not "C R A")
+function phoneticFix(txt) {
+  const map = {
+    "cra": "kra", "cre": "kreh", "cri": "kree", "cro": "kro", "cru": "kroo",
+    "bra": "bra", "bre": "breh", "bri": "bree", "bro": "bro", "bru": "broo",
+    "pla": "pla", "ple": "pleh", "pli": "plee", "plo": "plo", "plu": "ploo",
+    "sta": "sta", "ste": "steh", "sti": "stee", "sto": "sto", "stu": "stoo",
+    "cha": "cha", "che": "cheh", "chi": "chee", "cho": "cho", "chu": "choo",
+    "gra": "gra", "gre": "greh", "gri": "gree", "gro": "gro", "gru": "groo",
+    "tra": "tra", "tre": "treh", "tri": "tree", "tro": "tro", "tru": "troo",
+    "fra": "fra", "fre": "freh", "fri": "free", "fro": "fro", "fru": "froo",
+    "sha": "sha", "she": "sheh", "shi": "shee", "sho": "sho", "shu": "shoo",
+    "sna": "sna", "sne": "sneh", "sni": "snee", "sno": "sno", "snu": "snoo",
+    "spl": "spluh", "spr": "spruh", "str": "struh"
+  };
+  return map[txt.toLowerCase()] || txt;
+}
+
+// --- PRACTICE MODE ---
+const allCombos = blends.flatMap(b => ["a","e","i","o","u"].map(v => b+v));
+let correct = "";
+const feedback = document.getElementById("feedback");
+const gameButtons = document.getElementById("gameButtons");
+document.getElementById("playSound").onclick = newRound;
+
+function newRound() {
+  feedback.textContent = "";
+  gameButtons.innerHTML = "";
+  correct = allCombos[Math.floor(Math.random()*allCombos.length)];
+  speakBlend(correct);
+
+  // 4 options (1 correct, 3 random)
+  const options = new Set([correct]);
+  while (options.size < 4) {
+    options.add(allCombos[Math.floor(Math.random()*allCombos.length)]);
+  }
+  Array.from(options).sort(() => Math.random()-0.5).forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => check(opt);
+    gameButtons.appendChild(btn);
+  });
+}
+
+function check(choice) {
+  if (choice === correct) {
+    feedback.textContent = "✅ Correct! Well done!";
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent = `❌ Oops! It was "${correct}".`;
+    feedback.style.color = "red";
+  }
+}
+</script>
+</body>
+</html>
+
+
+<!---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Consonant Blends Practice</title>
+<style>
+  body {
+    font-family: "Comic Sans MS", sans-serif;
+    background-color: #f9fbff;
+    padding: 20px;
+    color: #222;
+  }
+  h1 { text-align: center; color: #004aad; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  th { background: #cce0ff; }
+  td { background: #f1f8ff; }
+  td span { cursor: pointer; color: #004aad; font-weight: bold; }
+  td span:hover { color: #ff6600; text-decoration: underline; }
+  .pronunciation { color: green; font-style: italic; font-size: 0.9em; }
+  #gameSection {
+    margin-top: 40px; text-align: center; background: #e8f0fe;
+    padding: 20px; border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  #gameButtons button {
+    margin: 5px; padding: 10px 18px; border-radius: 10px;
+    background: #4a90e2; color: white; border: none; cursor: pointer;
+  }
+  #gameButtons button:hover { background: #0056b3; }
+  #feedback { margin-top: 10px; font-weight: bold; font-size: 1.2em; }
+</style>
+</head>
+<body>
+<h1>English Consonant Blends Practice</h1>
+<p>Click any blend + vowel (like <b>bla</b>, <b>tre</b>) to hear its sound!</p>
+
+<table id="blendTable">
+  <tr>
+    <th>Blend</th>
+    <th>+ a</th>
+    <th>+ e</th>
+    <th>+ i</th>
+    <th>+ o</th>
+    <th>+ u</th>
+  </tr>
+</table>
+
+<div id="gameSection">
+  <h2>🎮 Practice Mode</h2>
+  <p>Click “Play Sound” to hear a blend and guess which one it is!</p>
+  <button id="playSound">🔊 Play Sound</button>
+  <div id="gameButtons"></div>
+  <div id="feedback"></div>
+</div>
+
+<script>
+// ✅ 100 Common English Blends
+const blends = [
   // 2-letter blends
   "bl","br","cl","cr","dr","fl","fr","gl","gr","pl","pr","sc","sk","sl","sm","sn","sp","st","sw","tr","tw",
   "ch","sh","th","wh","ph","ck","gh","ng",
@@ -137,4 +298,6 @@ function check(choice) {
 </script>
 </body>
 </html>
+--->
+
 
