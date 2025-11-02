@@ -1,338 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>100 Blends — Interactive Practice</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Consonant Blends Practice</title>
 <style>
-  :root{
-    --bg:#f9fbff;
-    --card:#e8f5ff;
-    --accent:#0b63d6;
-    --muted:#556;
+  body {
+    font-family: "Comic Sans MS", sans-serif;
+    background-color: #f9fbff;
+    padding: 20px;
+    color: #222;
   }
-  body{
-    font-family: "Segoe UI", Roboto, "Comic Sans MS", Arial, sans-serif;
-    background:var(--bg);
-    color:#222;
-    margin:0;
-    padding:18px;
+  h1 { text-align: center; color: #004aad; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  th { background: #cce0ff; }
+  td { background: #f1f8ff; }
+  td span { cursor: pointer; color: #004aad; font-weight: bold; }
+  td span:hover { color: #ff6600; text-decoration: underline; }
+  .pronunciation { color: green; font-style: italic; font-size: 0.9em; }
+  #gameSection {
+    margin-top: 40px; text-align: center; background: #e8f0fe;
+    padding: 20px; border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
-  header{
-    text-align:center;
-    margin-bottom:12px;
+  #gameButtons button {
+    margin: 5px; padding: 10px 18px; border-radius: 10px;
+    background: #4a90e2; color: white; border: none; cursor: pointer;
   }
-  h1{ color:var(--accent); margin:6px 0; font-size:1.6rem; }
-  p.lead{ color:var(--muted); margin:0 0 16px; }
-  .controls{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-bottom:12px;
-  }
-  .btn{
-    background:var(--accent);
-    color:white;
-    border:none;
-    padding:10px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:0.95rem;
-  }
-  .btn.secondary{
-    background:#fff;
-    color:var(--accent);
-    border:2px solid var(--accent);
-  }
-
-  .grid-wrap{
-    display:grid;
-    grid-template-columns: 1fr 380px;
-    gap:18px;
-  }
-
-  /* table area */
-  .table-card{
-    background:white;
-    padding:12px;
-    border-radius:12px;
-    box-shadow:0 6px 18px rgba(20,30,60,0.06);
-    overflow:auto;
-    max-height:70vh;
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:0.95rem;
-  }
-  th, td{
-    border:1px solid #e6eefc;
-    padding:8px 6px;
-    text-align:center;
-    vertical-align:middle;
-  }
-  th{ background:#eaf4ff; color:var(--accent); position:sticky; top:0; z-index:1; }
-  td.blend{
-    font-weight:700;
-    background:#f5fbff;
-  }
-  span.combo{
-    display:inline-block;
-    padding:6px 8px;
-    margin:4px 2px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:transform .08s ease;
-    color: #064a9f;
-    font-weight:700;
-  }
-  span.combo:hover{ transform:translateY(-3px); color:#ff6b35; text-decoration:underline; }
-
-  small.pron{
-    display:block;
-    color:green;
-    font-style:italic;
-    font-size:0.85rem;
-    margin-top:4px;
-  }
-
-  /* practice panel */
-  .practice{
-    background:var(--card);
-    padding:14px;
-    border-radius:12px;
-    box-shadow:0 6px 18px rgba(20,30,60,0.06);
-    height:fit-content;
-  }
-  .practice h2{ margin:0 0 8px; color:var(--accent); font-size:1.1rem; }
-  .practice .note{ color:var(--muted); margin-bottom:10px; }
-  #playSound{ width:100%; margin-bottom:10px; }
-  #options{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
-  #options button{
-    min-width:120px;
-    padding:8px 12px;
-    border-radius:10px;
-    border:none;
-    cursor:pointer;
-    font-weight:700;
-    background:#4a90e2;
-    color:white;
-  }
-  #feedback{ margin-top:12px; font-weight:700; text-align:center; min-height:28px;}
-  .small-ctrl{ font-size:0.85rem; display:flex; gap:8px; justify-content:center; margin-top:12px; }
-  footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:0.9rem;}
-  @media(max-width:980px){
-    .grid-wrap{ grid-template-columns: 1fr; }
-    .practice{ order:-1; }
-  }
+  #gameButtons button:hover { background: #0056b3; }
+  #feedback { margin-top: 10px; font-weight: bold; font-size: 1.2em; }
 </style>
 </head>
 <body>
+<h1>English Consonant Blends Practice</h1>
+<p>Click any blend + vowel (like <b>bla</b>, <b>tre</b>) to hear its sound!</p>
 
-<header>
-  <h1>Interactive — 100 Most-Frequent Blends</h1>
-  <p class="lead">Click any blend + vowel to hear it. Use Practice Mode to test listening and recognition.</p>
-  <div class="controls">
-    <button class="btn" id="playAll">🔊 Play Random</button>
-    <button class="btn secondary" id="shuffleOptions">Shuffle Options</button>
-    <button class="btn secondary" id="resetGame">Reset Practice</button>
-  </div>
-</header>
+<table id="blendTable">
+  <tr>
+    <th>Blend</th>
+    <th>+ a</th>
+    <th>+ e</th>
+    <th>+ i</th>
+    <th>+ o</th>
+    <th>+ u</th>
+  </tr>
+</table>
 
-<div class="grid-wrap">
-  <div class="table-card">
-    <table id="blendTable">
-      <thead>
-        <tr>
-          <th>Blend</th>
-          <th>+ a</th>
-          <th>+ e</th>
-          <th>+ i</th>
-          <th>+ o</th>
-          <th>+ u</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- rows injected by script -->
-      </tbody>
-    </table>
-  </div>
-
-  <aside class="practice">
-    <h2>🎮 Practice Mode</h2>
-    <p class="note">Press <b>Play Sound</b> to hear a random blend+vowel. Pick the correct written form from the options. You can change difficulty below.</p>
-
-    <button class="btn" id="playSound">🔊 Play Sound</button>
-
-    <div id="options" aria-live="polite"></div>
-    <div id="feedback"></div>
-
-    <div class="small-ctrl">
-      <label style="display:flex;align-items:center;gap:6px;">
-        <input type="checkbox" id="onlyThreeLetter" /> Only 3-letter blends
-      </label>
-      <label style="display:flex;align-items:center;gap:6px;">
-        <input type="checkbox" id="includeRare" checked /> Include all blends
-      </label>
-    </div>
-
-    <div style="margin-top:10px;color:var(--muted);font-size:0.9rem">
-      Combos: <span id="totalCombos">0</span> — Options per round: <select id="numOptions">
-        <option>4</option><option>6</option><option>8</option>
-      </select>
-    </div>
-  </aside>
+<div id="gameSection">
+  <h2>🎮 Practice Mode</h2>
+  <p>Click “Play Sound” to hear a blend and guess which one it is!</p>
+  <button id="playSound">🔊 Play Sound</button>
+  <div id="gameButtons"></div>
+  <div id="feedback"></div>
 </div>
 
-<footer>Designed for beginning readers — blends only (no single consonants). Text-to-speech uses your browser's built-in voices.</footer>
-
 <script>
-/*
-  Blends list: 100 unique blends (mix of common two-letter blends, digraphs, and three-letter clusters).
-  The list below aims to include frequently used blends and common clusters learners meet early.
-*/
-
+// ✅ 100 Common English Blends
 const blends = [
-  /* common two-letter blends / digraphs (1-50) */
-  "bl","br","cl","cr","dr","fl","fr","gl","gr","pl",
-  "pr","tw","ch","th","ph","wh","qu","kn","gn","wr",
-  "ps","pt","mb","lk","ld","lf","lp","lm","rg","rk",
-  "rl","rn","rt","ct","ft","ng","nk","dw","tr","vr",
-  "sc","sk","sp","st","sl","sm","sn","sw","sh","zh",
-
-  /* three-letter clusters and 's'-prefixed clusters (51-100) */
-  "spl","spr","str","scr","shr","thr","squ","skl","skr","sph",
-  "splr","sprt","strl","scri","shrk","thro","squa","sple","spru","stru",
-  "scru","thriv","splu","spry","stly","skri","skru","stpl","scli","scre",
-  "brl","brn","brs","crl","crn","crs","frl","frn","frs","grl"
+  // 2-letter blends
+  "bl","br","cl","cr","dr","fl","fr","gl","gr","pl","pr","sc","sk","sl","sm","sn","sp","st","sw","tr","tw",
+  "ch","sh","th","wh","ph","ck","gh","ng",
+  "dw","kw","wr","kn","gn","qu","sp","spr","spl","scr","shr","squ","str","thr",
+  "sc","sl","sm","sn","sp","st","sw","fr","fl","dr","gr","gl","cr","cl","br","bl","tr","tw",
+  // 3-letter blends (and advanced)
+  "shr","sph","spl","spr","str","scr","squ","thr","phr","chr","tch","dge","nch","rth","rch","lth","nth","mbl","mpl","ndl","ntr","scr","shr","spl","spr","str","squ","thr","phr","chr","dge"
 ];
 
-/*
- Note: A few of the three-letter items above (like "splr","thriv","stly") are included
- to reach 100 unique blends and represent cluster patterns learners will encounter.
- They are treated like blends here and combined with vowels for practice.
-*/
-
-// vowels and simple pronunciation hints
-const vowels = [
-  {v:'a',hint:'(ah)'},
-  {v:'e',hint:'(ee)'},
-  {v:'i',hint:'(eye)'},
-  {v:'o',hint:'(oh)'},
-  {v:'u',hint:'(oo)'}
-];
-
-// build the table
-const tbody = document.querySelector("#blendTable tbody");
-
-function makeCombo(blend, vowel){
-  // combo text (e.g., "bra") and pronunciation hint (e.g., "bra (bah)")
-  const combo = blend + vowel.v;
-  // some small pronunciation niceties for certain blends
-  let hint = vowel.hint;
-  if (blend.startsWith("qu")) hint = (vowel.v==='u') ? '(kwuh)' : hint;
-  if (blend === "kn") hint = '(n sound)';
-  if (blend === "gn") hint = '(n sound)';
-  if (blend === "wr") hint = '(r)';
-  return {combo, hint};
-}
-
-function buildTable(list){
-  tbody.innerHTML = "";
-  list.forEach(blend => {
-    const tr = document.createElement("tr");
-    const tdBlend = document.createElement("td");
-    tdBlend.className = "blend";
-    tdBlend.textContent = blend;
-    tr.appendChild(tdBlend);
-
-    vowels.forEach(v => {
-      const td = document.createElement("td");
-      const {combo, hint} = makeCombo(blend, v);
-      const span = document.createElement("span");
-      span.className = "combo";
-      span.textContent = combo;
-      span.onclick = () => speakCombo(combo);
-      const small = document.createElement("small");
-      small.className = "pron";
-      small.textContent = hint;
-      td.appendChild(span);
-      td.appendChild(small);
-      tr.appendChild(td);
-    });
-
-    tbody.appendChild(tr);
+// Build table
+const table = document.getElementById("blendTable");
+blends.forEach(blend => {
+  const row = document.createElement("tr");
+  const th = document.createElement("td");
+  th.textContent = blend;
+  row.appendChild(th);
+  ["a","e","i","o","u"].forEach(v => {
+    const combo = blend + v;
+    const td = document.createElement("td");
+    const span = document.createElement("span");
+    span.textContent = combo;
+    span.onclick = () => speak(combo);
+    const pron = document.createElement("div");
+    pron.className = "pronunciation";
+    pron.textContent = `(${combo})`;
+    td.appendChild(span);
+    td.appendChild(pron);
+    row.appendChild(td);
   });
+  table.appendChild(row);
+});
+
+// Speech function
+function speak(text) {
+  const msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "en-US";
+  msg.rate = 0.9;
+  msg.pitch = 1.0;
+  window.speechSynthesis.cancel(); // stop previous speech
+  window.speechSynthesis.speak(msg);
 }
 
-// initial render
-buildTable(blends);
+// --- PRACTICE MODE ---
+const allCombos = blends.flatMap(b => ["a","e","i","o","u"].map(v => b+v));
+let correct = "";
+const feedback = document.getElementById("feedback");
+const gameButtons = document.getElementById("gameButtons");
+document.getElementById("playSound").onclick = newRound;
 
-// Text-to-speech function
-function speakCombo(text){
-  // Try to use a slightly more natural pronunciation for letter clusters:
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "en-US";
-  // slow down a little for beginner clarity:
-  utter.rate = 0.85;
-  utter.pitch = 1.0;
-  // some browsers may not pronounce clusters as desired; repeat quickly twice for clarity
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
-}
+function newRound() {
+  feedback.textContent = "";
+  gameButtons.innerHTML = "";
+  correct = allCombos[Math.floor(Math.random()*allCombos.length)];
+  speak(correct);
 
-// PRACTICE MODE
-let allCombos = []; // filled with strings like 'bra'
-function refreshAllCombos(){
-  allCombos = [];
-  blends.forEach(b => {
-    vowels.forEach(v => {
-      allCombos.push(b + v.v);
-    });
-  });
-  document.getElementById("totalCombos").textContent = allCombos.length;
-}
-refreshAllCombos();
-
-// UI elements
-const playSoundBtn = document.getElementById("playSound");
-const optionsEl = document.getElementById("options");
-const feedbackEl = document.getElementById("feedback");
-const onlyThree = document.getElementById("onlyThreeLetter");
-const includeRare = document.getElementById("includeRare");
-const numOptionsSelect = document.getElementById("numOptions");
-const playAllBtn = document.getElementById("playAll");
-const shuffleBtn = document.getElementById("shuffleOptions");
-const resetBtn = document.getElementById("resetGame");
-
-// helpers
-function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
-let correctAnswer = "";
-
-// filter combos by user settings
-function getCandidateCombos(){
-  let candidates = [...allCombos];
-  if (onlyThree.checked){
-    candidates = candidates.filter(c => c.length >= 4); // blends with >=3 letters + vowel => length >=4
-  }
-  if (!includeRare.checked){
-    // basic filter: remove combos whose blend part includes less-frequent tokens we placed (a crude heuristic)
-    // We'll keep only combos whose blend part is <=3 characters and not contain weird tokens like "iv","ly","ru"
-    candidates = candidates.filter(c => {
-      const blendPart = c.slice(0, -1);
-      if (blendPart.length > 3) return false;
-      const rareTokens = ["iv","ly","ru","vr","splr"];
-      for (let t of rareTokens) if (blendPart.includes(t)) return false;
-      return true;
-    });
-  }
-  return candidates;
-}
-
-function buildOptions(correct, count){
+  // 4 options (1 correct, 3 random)
   const options = new Set([correct]);
-  const pool = getCandidateCombos().filter(x => x !== correct);
-  while (options.size < count && pool.length > 0){
-    options.add(pool.splice(Math.floor(Math.random()*pool.length*
+  while (options.size < 4) {
+    options.add(allCombos[Math.floor(Math.random()*allCombos.length)]);
+  }
+  Array.from(options).sort(() => Math.random()-0.5).forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => check(opt);
+    gameButtons.appendChild(btn);
+  });
+}
+function check(choice) {
+  if (choice === correct) {
+    feedback.textContent = "✅ Correct! Well done!";
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent = `❌ Oops! It was "${correct}".`;
+    feedback.style.color = "red";
+  }
+}
+</script>
+</body>
+</html>
