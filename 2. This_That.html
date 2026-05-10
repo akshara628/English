@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>One and Many</title>
+  <title>This and That</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,13 +12,13 @@
   <style>
     body {
       font-family: 'Roboto', cursive;
-      background-color: #fff9e6;
+      background-color: #e6f7ff;
       color: #333;
       padding: 20px;
     }
 
     h1 {
-      color: #d35400;
+      color: #1e90ff;
       text-align: center;
     }
 
@@ -43,7 +43,8 @@
     }
 
     .card img {
-      width: 50%;
+      width: 300px;
+      height: 300px;
       object-fit: cover;
       border-radius: 10px;
       cursor: pointer;
@@ -58,21 +59,21 @@
       display: none;
     }
 
-    /* Show caption */
+    /* Show caption when active */
     .show {
       display: block;
     }
 
     h2 {
-      color: #e67e22;
+      color: #007acc;
       text-align: center;
       margin-top: 40px;
     }
 
     .rule {
       font-size: 20px;
-      background: #fff3cd;
-      border-left: 8px solid #f1c40f;
+      background: #d0f0ff;
+      border-left: 8px solid #1e90ff;
       padding: 15px;
       margin: 20px auto;
       max-width: 600px;
@@ -85,8 +86,8 @@
       }
 
       .card img {
-        width: 100% !important;
-        height: auto !important;
+        width: 100%;
+        height: auto;
       }
     }
   </style>
@@ -94,90 +95,85 @@
 
 <body>
 
-  <h1>One and Many</h1>
+  <h1>This and That</h1>
 
   <div class="rule">
-    🟠 When we talk about <strong>one</strong> thing, we just use the word. <br><br>
-
-    🟢 When we talk about <strong>many</strong> things, we usually add an <strong>"s"</strong> at the end!
+    🔵 We use <strong>“this”</strong> for one thing that is <strong>close</strong> to us.<br><br>
+    🟣 We use <strong>“that”</strong> for one thing that is <strong>far</strong> from us.
   </div>
 
-  <p>Look at the pictures. Can you see the difference between <strong>one</strong> and <strong>many</strong>?</p>
+ <p>Look at the pictures. Can you tell which is <strong>this</strong> and which is <strong>that</strong>?</p>
 
-  <!-- Book -->
+  <!-- Apple -->
   <div class="grid">
 
     <div class="card">
-      <img src="./images/book1.png"
-           alt="One Book"
+      <img src="./images/this_apple.png"
+           alt="This is an apple"
            onclick="toggleCaption('cap1')">
 
       <div class="caption" id="cap1">
-        One Book
+        This is an apple.
       </div>
     </div>
 
     <div class="card">
-      <img src="./images/Book2.png"
-           alt="Two Books"
+      <img src="./images/that_apple.png"
+           alt="That is an apple"
            onclick="toggleCaption('cap2')">
 
       <div class="caption" id="cap2">
-        Two Books
+        That is an apple.
       </div>
     </div>
 
   </div>
 
-  <!-- Ball -->
+  <!-- Hat -->
   <div class="grid">
 
     <div class="card">
-      <img src="./images/Ball1.png"
-           style="width: 40%; height: 250px;"
-           alt="One Ball"
+      <img src="./images/this_hat.png"
+           alt="This is a hat"
            onclick="toggleCaption('cap3')">
 
       <div class="caption" id="cap3">
-        One Ball
+        This is a hat.
       </div>
     </div>
 
     <div class="card">
-      <img src="./images/Ball2.png"
-           style="width: 65%; height: 250px;"
-           alt="Three Balls"
+      <img src="./images/that_hat.png"
+           alt="That is a hat"
            onclick="toggleCaption('cap4')">
 
       <div class="caption" id="cap4">
-        Three Balls
+        That is a hat.
       </div>
     </div>
 
   </div>
 
-  <!-- Butterfly -->
+  <!-- Car -->
   <div class="grid">
 
     <div class="card">
-      <img src="./images/Butterfly1.png"
-           style="width: 50%; height: 250px;"
-           alt="One Butterfly"
+      <img src="./images/this_car.png"
+           alt="This is a car"
            onclick="toggleCaption('cap5')">
 
       <div class="caption" id="cap5">
-        One Butterfly
+        This is a car.
       </div>
     </div>
 
     <div class="card">
-      <img src="./images/Butterfly2.png"
-           style="width: 65%; height: 250px;"
-           alt="Many Butterflies"
+      <img src="./images/that_car.png"
+           alt="That is a car"
            onclick="toggleCaption('cap6')">
 
       <div class="caption" id="cap6">
-        Many Butterflies
+        That is a car.
       </div>
     </div>
 
@@ -186,9 +182,8 @@
   <h2>Easy Rule!</h2>
 
   <div class="rule">
-    🟠 <strong>One:</strong> No "s" at the end.<br><br>
-
-    🟢 <strong>Many:</strong> Add <strong>"s"</strong> at the end to show there is more than one.
+    🔵 <strong>This:</strong> Use for one thing that is near you.<br><br>
+    🟣 <strong>That:</strong> Use for one thing that is far from you.
   </div>
 
   <script>
