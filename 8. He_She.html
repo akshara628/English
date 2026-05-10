@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>He and She</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', cursive;
+      background-color: #fff4f8;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #c0392b;
+      text-align: center;
+    }
+
+    p {
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 60%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .caption {
+      font-family: 'Roboto', cursive;
+      font-size: 22px;
+      margin-top: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h2 {
+      color: #d63031;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .rule {
+      font-size: 20px;
+      background: #ffe6e9;
+      border-left: 8px solid #e74c3c;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 650px;
+      border-radius: 8px;
+    }
+
+    .rule strong {
+      color: #2c3e50;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>He and She</h1>
+
+  <div class="rule">
+    🔴 <strong>He</strong> = We use for a boy or a man.<br><br>
+    🟣 <strong>She</strong> = We use for a girl or a woman.
+  </div>
+
+  <p>Look at the pictures. Is the person a boy or a girl?</p>
+
+  <!-- Student -->
+  <div class="grid">
+    <div class="card">
+      <img src="./images/He_Student.png" alt="He is a student">
+      <div class="caption">
+        He is a student.
+      </div>
+    </div>
+    <div class="card">
+      <img src="./images/She_Student.png" alt="She is a student">
+      <div class="caption">
+        She is a student.
+      </div>
+    </div>
+  </div>
+
+  <!-- Doctor -->
+  <div class="grid">
+    <div class="card">
+      <img src="./images/He_Doctor.png" alt="He is a doctor">
+      <div class="caption">
+        He is a doctor.
+      </div>
+    </div>
+    <div class="card">
+      <img src="./images/She_Doctor.png" alt="She is a doctor">
+      <div class="caption">
+        She is a doctor.
+      </div>
+    </div>
+  </div>
+
+  <!-- Singer -->
+  <div class="grid">
+    <div class="card">
+      <img src="./images/He_Singer.png" alt="He is a singer">
+      <div class="caption">
+        He is a singer.
+      </div>
+    </div>
+    <div class="card">
+      <img src="./images/She_Singer.png" alt="She is a singer">
+      <div class="caption">
+        She is a singer.
+      </div>
+    </div>
+  </div>
+
+  <h2>Quick Tip!</h2>
+  <div class="rule">
+    👦 <strong>He</strong> = BOY<br>
+    👧 <strong>She</strong> = GIRL<br><br>
+    Use them when you talk about other people (not "I" or "You").
+  </div>
+
+</body>
+</html>
