@@ -80,6 +80,7 @@
 <body>
 
   <h1>This and These</h1>
+
   <div class="rule">
     🔵 Use <strong>“this”</strong> for <strong>one thing</strong> that is <strong>close</strong> to us.<br><br>
     🟢 Use <strong>“these”</strong> for <strong>many things</strong> that are <strong>close</strong> to us.
@@ -88,58 +89,100 @@
   <p>Look at the pictures. Can you tell which is <strong>this</strong> and which are <strong>these</strong>?</p>
 
   <!-- Pencil -->
+
   <div class="grid">
-    <div class="card">
-      <img src="./images/this_pencil.jfif" alt="This is a pencil">
-      <div class="caption">
-        This is a pencil.
-      </div>
-    </div>
-    <div class="card">
-      <img src="./images/these_pencils.jfif" alt="These are pencils">
-      <div class="caption">
-        These are pencils.
-      </div>
-    </div>
+
+<div class="card">
+  <img src="./images/this_pencil.jfif"
+       alt="This is a pencil"
+       onclick="toggleCaption('cap1')">
+
+  <div class="caption" id="cap1">
+    This is a pencil.
+  </div>
+</div>
+
+<div class="card">
+  <img src="./images/these_pencils.jfif"
+       alt="These are pencils"
+       onclick="toggleCaption('cap2')">
+
+  <div class="caption" id="cap2">
+    These are pencils.
+  </div>
+</div>
+
   </div>
 
   <!-- Cup -->
+
   <div class="grid">
-    <div class="card">
-      <img src="./images/CupThis.jfif" style="width: 55%; height: 250px;" alt="This is a cup">
-      <div class="caption">
-        This is a cup.
-      </div>
-    </div>
-    <div class="card">
-      <img src="./images/CupThese.jfif" style="width: 65%; height: 250px;" alt="These are cups">
-      <div class="caption">
-        These are cups.
-      </div>
-    </div>
+
+<div class="card">
+  <img src="./images/CupThis.jfif"
+       style="width:55%; height:250px;"
+       alt="This is a cup"
+       onclick="toggleCaption('cap3')">
+
+  <div class="caption" id="cap3">
+    This is a cup.
+  </div>
+</div>
+
+<div class="card">
+  <img src="./images/CupThese.jfif"
+       style="width:65%; height:250px;"
+       alt="These are cups"
+       onclick="toggleCaption('cap4')">
+
+  <div class="caption" id="cap4">
+    These are cups.
+  </div>
+</div>
+
   </div>
 
   <!-- Toy -->
+
   <div class="grid">
-    <div class="card">
-      <img src="./images/ToyThis.jfif" style="width: 60%; height: 250px;" alt="This is a toy">
-      <div class="caption">
-        This is a toy.
-      </div>
-    </div>
-    <div class="card">
-      <img src="./images/ToyThese.jfif" style="width: 70%; height: 250px;" alt="These are toys">
-      <div class="caption">
-        These are toys.
-      </div>
-    </div>
+
+<div class="card">
+  <img src="./images/ToyThis.jfif"
+       style="width:60%; height:250px;"
+       alt="This is a toy"
+       onclick="toggleCaption('cap5')">
+
+  <div class="caption" id="cap5">
+    This is a toy.
+  </div>
+</div>
+
+<div class="card">
+  <img src="./images/ToyThese.jfif"
+       style="width:70%; height:250px;"
+       alt="These are toys"
+       onclick="toggleCaption('cap6')">
+
+  <div class="caption" id="cap6">
+    These are toys.
+  </div>
+</div>
+
   </div>
 
   <h2>Easy Rule!</h2>
+
   <div class="rule">
     🔵 <strong>This:</strong> One thing that is near you.<br><br>
     🟢 <strong>These:</strong> Many things that are near you.
   </div>
 
+  <script>
+    function toggleCaption(id) {
+      document.getElementById(id).classList.toggle("show");
+    }
+  </script>
+
 </body>
+
 </html>
